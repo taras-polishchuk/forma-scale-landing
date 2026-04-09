@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FORMA Scale — Know Your Body. Own Your Progress.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ─────────────── RESET & BASE ─────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0a0a0f;
+      --bg2:      #111118;
+      --bg3:      #16161f;
+      --border:   rgba(255,255,255,0.08);
+      --white:    #ffffff;
+      --off:      #a0a0b8;
+      --accent:   #5b6ef5;
+      --accent2:  #7c8cf8;
+      --grad:     linear-gradient(135deg, #5b6ef5 0%, #a78bfa 100%);
+      --grad2:    linear-gradient(135deg, #1e1e2e 0%, #0a0a0f 100%);
+      --radius:   16px;
+      --radius-lg:24px;
+      --shadow:   0 24px 80px rgba(0,0,0,.6);
+      --shadow-card: 0 8px 40px rgba(0,0,0,.4);
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ─────────────── TYPOGRAPHY ─────────────── */
+    .eyebrow {
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent2);
+    }
+    h1 { font-size: clamp(2.8rem, 8vw, 6.5rem); font-weight: 900; line-height: 1.0; letter-spacing: -.03em; }
+    h2 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -.025em; }
+    h3 { font-size: 1.25rem; font-weight: 700; }
+    p  { line-height: 1.7; color: var(--off); }
+
+    /* ─────────────── LAYOUT ─────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 120px 0; position: relative; }
+
+    /* ─────────────── UTILITIES ─────────────── */
+    .gradient-text {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(91,110,245,.15);
+      border: 1px solid rgba(91,110,245,.35);
+      color: var(--accent2);
+      padding: 6px 14px; border-radius: 100px;
+      font-size: .78rem; font-weight: 600; letter-spacing: .06em;
+    }
+    .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); flex-shrink: 0; animation: pulse-dot 2s ease-in-out infinite; }
+
+    /* ─────────────── BUTTONS ─────────────── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 16px 36px; border-radius: 100px;
+      font-size: 1rem; font-weight: 700;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      position: relative; overflow: hidden;
+    }
+    .btn::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(255,255,255,0); transition: background .2s;
+    }
+    .btn:hover::after { background: rgba(255,255,255,.07); }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary {
+      background: var(--grad);
+      color: #fff;
+      box-shadow: 0 8px 32px rgba(91,110,245,.4);
+    }
+    .btn-primary:hover { box-shadow: 0 12px 48px rgba(91,110,245,.6); }
+    .btn-outline {
+      border: 1.5px solid var(--border);
+      color: var(--off);
+      backdrop-filter: blur(8px);
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,.25); color: var(--white); }
+    .btn-lg { padding: 20px 48px; font-size: 1.1rem; }
+
+    /* ─────────────── NAV ─────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 18px 24px;
+      transition: background .3s, backdrop-filter .3s, box-shadow .3s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,15,.85);
+      backdrop-filter: blur(24px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-size: 1.3rem; font-weight: 900; letter-spacing: -.03em; }
+    .nav-logo span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { font-size: .875rem; font-weight: 500; color: var(--off); transition: color .2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+    .nav-mobile-toggle { display: none; flex-direction: column; gap: 5px; padding: 4px; }
+    .nav-mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: .3s; }
+    .nav-mobile-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-mobile-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-mobile-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile-menu {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 90;
+      background: rgba(10,10,15,.97); backdrop-filter: blur(24px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+      opacity: 0; transition: opacity .25s ease;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu.visible { opacity: 1; }
+    .nav-mobile-menu a {
+      font-size: 2rem; font-weight: 800; color: var(--white);
+      letter-spacing: -.02em; padding: 12px 0;
+      transition: color .2s;
+    }
+    .nav-mobile-menu a:hover { color: var(--accent2); }
+    .nav-mobile-menu-cta { margin-top: 24px; }
+
+    /* ─────────────── HERO ─────────────── */
+    #hero {
+      min-height: 100svh;
+      display: flex; align-items: center;
+      padding: 120px 0 80px;
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-content .badge { margin-bottom: 28px; }
+    .hero-content h1 { margin-bottom: 24px; }
+    .hero-content p { font-size: 1.15rem; max-width: 480px; margin-bottom: 40px; }
+    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 56px;
+      padding-top: 40px; border-top: 1px solid var(--border);
+    }
+    .stat-num { font-size: 2rem; font-weight: 900; letter-spacing: -.03em; }
+    .stat-label { font-size: .8rem; color: var(--off); margin-top: 2px; }
+    .hero-visual {
+      position: relative; display: flex;
+      justify-content: center; align-items: center;
+    }
+    .hero-scale-wrap {
+      position: relative; width: 420px; height: 420px;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .hero-scale-wrap::before {
+      content: ''; position: absolute; inset: -40px;
+      background: radial-gradient(circle, rgba(91,110,245,.25) 0%, transparent 70%);
+      border-radius: 50%; animation: glow-pulse 3s ease-in-out infinite;
+    }
+    .scale-svg-wrapper {
+      position: relative; z-index: 2;
+      filter: drop-shadow(0 40px 80px rgba(91,110,245,.35));
+      animation: float 5s ease-in-out infinite;
+    }
+    .orbit {
+      position: absolute; border-radius: 50%; border: 1px solid rgba(91,110,245,.15);
+      animation: spin linear infinite;
+    }
+    .orbit-1 { width: 340px; height: 340px; animation-duration: 20s; }
+    .orbit-2 { width: 460px; height: 460px; animation-duration: 35s; animation-direction: reverse; }
+    .orbit-dot {
+      position: absolute; top: 50%; left: -4px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); margin-top: -4px;
+    }
+    .metric-card {
+      position: absolute; background: rgba(22,22,31,.9);
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 12px 18px; backdrop-filter: blur(12px);
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: var(--shadow-card);
+      animation: float-card 4s ease-in-out infinite;
+    }
+    .metric-card:nth-child(1) { top: 60px; right: -20px; animation-delay: 0s; }
+    .metric-card:nth-child(2) { bottom: 80px; left: -30px; animation-delay: 1.5s; }
+    .metric-icon { font-size: 1.4rem; }
+    .metric-value { font-weight: 800; font-size: 1rem; }
+    .metric-label { font-size: .7rem; color: var(--off); }
+    .hero-bg-grid {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(91,110,245,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(91,110,245,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    /* ─────────────── LOGOS STRIP ─────────────── */
+    #logos {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .logos-label { text-align: center; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(160,160,184,.5); margin-bottom: 24px; }
+    .logos-track {
+      display: flex; gap: 60px; align-items: center;
+      animation: marquee 25s linear infinite;
+      width: max-content;
+    }
+    .logos-track-wrap { overflow: hidden; }
+    .logo-item { font-size: .85rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.2); white-space: nowrap; transition: color .3s; }
+    .logo-item:hover { color: rgba(255,255,255,.5); }
+
+    /* ─────────────── BENEFITS ─────────────── */
+    #benefits { background: var(--bg2); }
+    .section-header { text-align: center; margin-bottom: 72px; }
+    .section-header .eyebrow { margin-bottom: 16px; }
+    .section-header h2 { margin-bottom: 16px; }
+    .section-header p { max-width: 560px; margin: 0 auto; font-size: 1.05rem; }
+    .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .benefit-card {
+      background: var(--bg3);
+      padding: 48px 40px;
+      position: relative; overflow: hidden;
+      transition: background .3s;
+    }
+    .benefit-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: var(--grad);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .4s ease;
+    }
+    .benefit-card:hover { background: #1a1a26; }
+    .benefit-card:hover::before { transform: scaleX(1); }
+    .benefit-card:first-child { border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+    .benefit-card:last-child  { border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+    .benefit-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: rgba(91,110,245,.12);
+      border: 1px solid rgba(91,110,245,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 24px;
+      transition: transform .3s, background .3s;
+    }
+    .benefit-card:hover .benefit-icon { transform: scale(1.1) rotate(-4deg); background: rgba(91,110,245,.22); }
+    .benefit-card h3 { margin-bottom: 12px; font-size: 1.1rem; }
+    .benefit-card p { font-size: .9rem; line-height: 1.65; }
+
+    /* ─────────────── SHOWCASE ─────────────── */
+    #showcase { overflow: hidden; }
+    .showcase-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .showcase-tabs {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px;
+    }
+    .showcase-tab {
+      padding: 9px 20px; border-radius: 100px;
+      font-size: .85rem; font-weight: 600;
+      border: 1.5px solid var(--border);
+      color: var(--off); transition: .2s;
+    }
+    .showcase-tab.active, .showcase-tab:hover {
+      border-color: var(--accent); color: var(--white);
+      background: rgba(91,110,245,.12);
+    }
+    .showcase-panel { display: none; }
+    .showcase-panel.active { display: block; animation: fade-up .4s ease; }
+    .showcase-panel h3 { font-size: 1.6rem; margin-bottom: 16px; }
+    .showcase-panel p { margin-bottom: 28px; }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .feature-list li {
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: .9rem; color: var(--off);
+    }
+    .feature-list li::before {
+      content: '';
+      flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+      background: var(--grad);
+      background-clip: text; -webkit-background-clip: text;
+      border: 1.5px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .65rem;
+      color: var(--accent); line-height: 18px; text-align: center;
+    }
+    .feature-check { flex-shrink: 0; color: var(--accent2); font-size: .8rem; margin-top: 1px; }
+    .showcase-device {
+      position: relative; display: flex;
+      justify-content: center; align-items: center;
+    }
+    .device-frame {
+      width: 320px; height: 320px; border-radius: 50%;
+      background: var(--bg3); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(91,110,245,.1), 0 40px 80px rgba(0,0,0,.5);
+    }
+    .device-frame::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(91,110,245,.1), transparent 60%);
+    }
+    .scale-visual {
+      width: 220px; height: 220px; border-radius: 28px;
+      background: linear-gradient(145deg, #1e1e2e, #2a2a3e);
+      border: 1px solid rgba(255,255,255,.08);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,.6);
+      position: relative; z-index: 2;
+      transition: transform .3s;
+    }
+    .scale-visual:hover { transform: scale(1.04); }
+    .scale-display {
+      font-size: 2.5rem; font-weight: 900; letter-spacing: -.03em;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .scale-unit { font-size: .7rem; color: var(--off); margin-top: 2px; letter-spacing: .1em; }
+    .scale-label { font-size: .6rem; color: rgba(160,160,184,.4); text-transform: uppercase; letter-spacing: .12em; margin-top: 12px; }
+    .scale-led { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 16px; box-shadow: 0 0 8px var(--accent); animation: led-blink 2s ease-in-out infinite; }
+    .showcase-float {
+      position: absolute; background: rgba(16,16,24,.95);
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 10px 16px; backdrop-filter: blur(12px);
+      font-size: .78rem; font-weight: 600;
+    }
+    .showcase-float.top { top: 20px; right: 10px; color: var(--accent2); }
+    .showcase-float.bottom { bottom: 30px; left: 10px; color: #4ade80; }
+
+    /* ─────────────── METRICS STRIP ─────────────── */
+    #metrics { padding: 0; }
+    .metrics-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .metric-box {
+      padding: 48px 32px; position: relative;
+      border-right: 1px solid var(--border);
+      transition: background .3s;
+    }
+    .metric-box:last-child { border-right: none; }
+    .metric-box:hover { background: var(--bg3); }
+    .metric-big { font-size: 3rem; font-weight: 900; letter-spacing: -.04em; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .metric-desc { font-size: .85rem; color: var(--off); margin-top: 6px; }
+
+    /* ─────────────── REVIEWS ─────────────── */
+    #reviews { background: var(--bg2); }
+    .reviews-slider { position: relative; overflow: hidden; }
+    .reviews-track {
+      display: flex; gap: 24px;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
+      will-change: transform;
+    }
+    .review-card {
+      flex: 0 0 380px; background: var(--bg3);
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 36px; position: relative; overflow: hidden;
+    }
+    .review-card::before {
+      content: '"'; position: absolute; top: -10px; right: 24px;
+      font-size: 8rem; font-weight: 900; color: rgba(91,110,245,.06);
+      line-height: 1; pointer-events: none;
+    }
+    .review-stars { display: flex; gap: 4px; font-size: .9rem; margin-bottom: 20px; }
+    .review-text { font-size: .95rem; line-height: 1.7; color: var(--off); margin-bottom: 28px; }
+    .review-author { display: flex; align-items: center; gap: 14px; }
+    .review-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--grad); display: flex; align-items: center;
+      justify-content: center; font-weight: 800; font-size: .9rem; flex-shrink: 0;
+    }
+    .review-name { font-weight: 700; font-size: .9rem; }
+    .review-role { font-size: .75rem; color: var(--off); margin-top: 2px; }
+    .slider-controls {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; margin-top: 40px;
+    }
+    .slider-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1.5px solid var(--border); color: var(--off);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; transition: .2s;
+    }
+    .slider-btn:hover { border-color: var(--accent); color: var(--white); background: rgba(91,110,245,.1); }
+    .slider-dots { display: flex; gap: 8px; align-items: center; }
+    .slider-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); transition: .3s; cursor: pointer; }
+    .slider-dot.active { background: var(--accent); width: 24px; border-radius: 3px; }
+
+    /* ─────────────── FAQ ─────────────── */
+    #faq { background: var(--bg); }
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 2px; }
+    .faq-item {
+      background: var(--bg3); border-radius: var(--radius);
+      overflow: hidden; border: 1px solid var(--border);
+      transition: border-color .3s;
+    }
+    .faq-item.open { border-color: rgba(91,110,245,.3); }
+    .faq-q {
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; gap: 20px;
+      padding: 24px 28px;
+      font-weight: 600; font-size: .95rem; text-align: left;
+      color: var(--white); transition: color .2s;
+    }
+    .faq-q:hover { color: var(--accent2); }
+    .faq-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,.06); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem; flex-shrink: 0; transition: .3s;
+    }
+    .faq-item.open .faq-icon { background: rgba(91,110,245,.15); border-color: var(--accent); transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s cubic-bezier(.4,0,.2,1), padding .35s;
+    }
+    .faq-a-inner { padding: 0 28px 24px; font-size: .9rem; line-height: 1.75; color: var(--off); }
+
+    /* ─────────────── CLOSING CTA ─────────────── */
+    #closing-cta {
+      background: var(--bg2); text-align: center;
+      padding: 140px 24px;
+    }
+    .cta-glow {
+      position: absolute; width: 600px; height: 400px;
+      background: radial-gradient(circle, rgba(91,110,245,.18) 0%, transparent 70%);
+      left: 50%; top: 50%; transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+    #closing-cta .container { position: relative; z-index: 2; }
+    #closing-cta .eyebrow { margin-bottom: 24px; }
+    #closing-cta h2 { margin-bottom: 20px; }
+    #closing-cta p { font-size: 1.1rem; max-width: 520px; margin: 0 auto 48px; }
+    .cta-group { display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .trust-badges {
+      display: flex; justify-content: center; align-items: center;
+      gap: 28px; flex-wrap: wrap; margin-top: 48px;
+    }
+    .trust-badge { display: flex; align-items: center; gap: 8px; font-size: .8rem; color: rgba(255,255,255,.4); }
+    .trust-badge span:first-child { font-size: 1rem; }
+
+    /* ─────────────── FOOTER ─────────────── */
+    footer {
+      background: var(--bg); border-top: 1px solid var(--border);
+      padding: 48px 24px; text-align: center;
+    }
+    .footer-logo { font-size: 1.2rem; font-weight: 900; margin-bottom: 16px; }
+    .footer-logo span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 24px; }
+    .footer-links a { font-size: .8rem; color: rgba(255,255,255,.3); transition: color .2s; }
+    .footer-links a:hover { color: var(--white); }
+    footer p { font-size: .75rem; color: rgba(255,255,255,.2); }
+
+    /* ─────────────── STICKY CTA ─────────────── */
+    .sticky-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(10,10,15,.92); backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      transform: translateY(100%); transition: transform .4s cubic-bezier(.4,0,.2,1);
+    }
+    .sticky-bar.visible { transform: translateY(0); }
+    .sticky-bar-text { font-size: .95rem; font-weight: 600; }
+    .sticky-bar-text span { color: var(--off); font-weight: 400; font-size: .85rem; }
+    .sticky-bar-actions { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+    .sticky-price { font-size: 1.3rem; font-weight: 900; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* ─────────────── SCROLL REVEAL ─────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* ─────────────── PROGRESS BAR ─────────────── */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; z-index: 200;
+      height: 3px; background: var(--grad);
+      width: 0%; transition: width .1s linear;
+    }
+
+    /* ─────────────── ANIMATIONS ─────────────── */
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
+    @keyframes float-card { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    @keyframes glow-pulse { 0%,100%{opacity:.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.05)} }
+    @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
+    @keyframes led-blink { 0%,100%{opacity:1;box-shadow:0 0 8px var(--accent)} 50%{opacity:.4;box-shadow:0 0 3px var(--accent)} }
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    @keyframes fade-up { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes counter-anim { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ─────────────── RESPONSIVE ─────────────── */
+    @media (max-width: 900px) {
+      section { padding: 80px 0; }
+      .hero-grid { grid-template-columns: 1fr; gap: 60px; text-align: center; }
+      .hero-content p { margin: 0 auto 40px; }
+      .hero-actions { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-scale-wrap { width: 300px; height: 300px; }
+      .orbit-1 { width: 260px; height: 260px; }
+      .orbit-2 { width: 340px; height: 340px; }
+      .metrics-grid { grid-template-columns: repeat(2,1fr); }
+      .metric-box:nth-child(2) { border-right: none; }
+      .metric-box { border-bottom: 1px solid var(--border); }
+      .metric-box:nth-child(3), .metric-box:nth-child(4) { border-bottom: none; }
+      .metric-box:nth-child(4) { border-right: none; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .benefit-card:first-child, .benefit-card:last-child { border-radius: var(--radius); }
+      .benefit-card { border-radius: var(--radius); }
+      .showcase-inner { grid-template-columns: 1fr; gap: 48px; }
+      .review-card { flex: 0 0 300px; }
+      .nav-links, .nav-cta .btn-outline { display: none; }
+      .nav-mobile-toggle { display: flex; }
+      .sticky-bar { flex-direction: column; gap: 10px; padding: 16px; }
+      .sticky-bar-text, .sticky-bar-actions { width: 100%; }
+      .sticky-bar-actions { justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 2.6rem; }
+      .hero-scale-wrap { width: 260px; height: 260px; }
+      .orbit-1 { width: 200px; height: 200px; }
+      .orbit-2 { width: 280px; height: 280px; }
+      .metric-card:nth-child(1) { right: -10px; }
+      .metric-card:nth-child(2) { left: -10px; }
+      .metrics-grid { grid-template-columns: 1fr; }
+      .metric-box { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">FOR<span>MA</span></div>
+      <ul class="nav-links">
+        <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#showcase">Features</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-cta">
+        <button class="btn btn-outline" style="padding:10px 22px;font-size:.85rem;">Learn More</button>
+        <button class="btn btn-primary" style="padding:10px 22px;font-size:.85rem;">Buy Now — $149</button>
+      </div>
+      <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="badge reveal">New Release 2026</div>
+          <h1 class="reveal reveal-delay-1">Know<br/><span class="gradient-text">Every</span><br/>Number.</h1>
+          <p class="reveal reveal-delay-2">FORMA Scale measures 17 body metrics in 10 seconds. Syncs with your health apps. Built for people who take progress seriously.</p>
+          <div class="hero-actions reveal reveal-delay-3">
+            <button class="btn btn-primary btn-lg">Buy Now — $149
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </button>
+            <button class="btn btn-outline btn-lg">Watch Demo</button>
+          </div>
+          <div class="hero-stats reveal reveal-delay-4">
+            <div>
+              <div class="stat-num gradient-text" data-count="17">0</div>
+              <div class="stat-label">Body Metrics</div>
+            </div>
+            <div>
+              <div class="stat-num gradient-text" data-count="98">0</div>
+              <div class="stat-label">% Accuracy</div>
+            </div>
+            <div>
+              <div class="stat-num gradient-text" data-count="12">0</div>
+              <div class="stat-label">Month Warranty</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-scale-wrap">
+            <div class="orbit orbit-1"><div class="orbit-dot"></div></div>
+            <div class="orbit orbit-2"><div class="orbit-dot" style="top:-4px;left:50%;margin-left:-4px;"></div></div>
+            <div class="scale-svg-wrapper">
+              <!-- SVG Smart Scale Illustration -->
+              <svg width="260" height="200" viewBox="0 0 260 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="scaleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#1e1e2e"/>
+                    <stop offset="100%" stop-color="#2a2a42"/>
+                  </linearGradient>
+                  <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#5b6ef5"/>
+                    <stop offset="100%" stop-color="#a78bfa"/>
+                  </linearGradient>
+                  <linearGradient id="topGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#2e2e44"/>
+                    <stop offset="100%" stop-color="#1e1e2e"/>
+                  </linearGradient>
+                  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="rgba(91,110,245,0.3)"/>
+                  </filter>
+                </defs>
+                <!-- Scale body -->
+                <rect x="10" y="60" width="240" height="120" rx="24" fill="url(#scaleGrad)" filter="url(#shadow)"/>
+                <!-- Top face -->
+                <rect x="10" y="50" width="240" height="30" rx="15" fill="url(#topGrad)"/>
+                <!-- Glass screen -->
+                <rect x="80" y="72" width="100" height="52" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                <!-- Screen content -->
+                <text x="130" y="100" font-family="Inter,sans-serif" font-size="22" font-weight="900" text-anchor="middle" fill="url(#screenGrad)">72.4</text>
+                <text x="130" y="114" font-family="Inter,sans-serif" font-size="8" fill="rgba(255,255,255,0.4)" text-anchor="middle" letter-spacing="2">KG</text>
+                <!-- LED indicator -->
+                <circle cx="130" cy="156" r="4" fill="#5b6ef5" opacity="0.9">
+                  <animate attributeName="opacity" values="0.9;0.3;0.9" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <!-- Sensor pads -->
+                <rect x="30" y="80" width="38" height="28" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)"/>
+                <rect x="192" y="80" width="38" height="28" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)"/>
+                <rect x="30" y="128" width="38" height="28" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)"/>
+                <rect x="192" y="128" width="38" height="28" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.05)"/>
+                <!-- BIA electrode lines -->
+                <line x1="68" y1="94" x2="80" y2="98" stroke="rgba(91,110,245,0.2)" stroke-width="1"/>
+                <line x1="192" y1="94" x2="180" y2="98" stroke="rgba(91,110,245,0.2)" stroke-width="1"/>
+                <!-- Bottom shadow -->
+                <ellipse cx="130" cy="192" rx="100" ry="8" fill="rgba(0,0,0,0.3)"/>
+              </svg>
+            </div>
+
+            <!-- Metric floating cards -->
+            <div class="metric-card">
+              <div class="metric-icon">🫀</div>
+              <div>
+                <div class="metric-value gradient-text">18.4%</div>
+                <div class="metric-label">Body Fat</div>
+              </div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-icon">💪</div>
+              <div>
+                <div class="metric-value" style="color:#4ade80">+2.1 kg</div>
+                <div class="metric-label">Muscle Mass</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO STRIP -->
+  <div id="logos">
+    <div class="container">
+      <div class="logos-label">Featured in</div>
+    </div>
+    <div class="logos-track-wrap">
+      <div class="logos-track">
+        <div class="logo-item">TechCrunch</div>
+        <div class="logo-item">Wired</div>
+        <div class="logo-item">Men's Health</div>
+        <div class="logo-item">Forbes</div>
+        <div class="logo-item">Product Hunt</div>
+        <div class="logo-item">Runner's World</div>
+        <div class="logo-item">GQ</div>
+        <div class="logo-item">The Verge</div>
+        <!-- duplicate for seamless loop -->
+        <div class="logo-item">TechCrunch</div>
+        <div class="logo-item">Wired</div>
+        <div class="logo-item">Men's Health</div>
+        <div class="logo-item">Forbes</div>
+        <div class="logo-item">Product Hunt</div>
+        <div class="logo-item">Runner's World</div>
+        <div class="logo-item">GQ</div>
+        <div class="logo-item">The Verge</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENEFITS -->
+  <section id="benefits">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow reveal">Why FORMA</div>
+        <h2 class="reveal reveal-delay-1">More than just<br/><span class="gradient-text">your weight</span></h2>
+        <p class="reveal reveal-delay-2">Most scales tell you one number. FORMA gives you the complete picture of your health, every single time you step on.</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card reveal">
+          <div class="benefit-icon">⚡</div>
+          <h3>17 Metrics in 10s</h3>
+          <p>BIA technology measures body fat, muscle mass, BMI, bone density, visceral fat, water weight — instantly.</p>
+        </div>
+        <div class="benefit-card reveal reveal-delay-1">
+          <div class="benefit-icon">📱</div>
+          <h3>Syncs Everywhere</h3>
+          <p>Native integration with Apple Health, Google Fit, Fitbit & Garmin. Your data, where you need it.</p>
+        </div>
+        <div class="benefit-card reveal reveal-delay-2">
+          <div class="benefit-icon">👥</div>
+          <h3>8 User Profiles</h3>
+          <p>Every family member gets their own data. Auto-recognizes who stepped on. Personalized insights for all.</p>
+        </div>
+        <div class="benefit-card reveal reveal-delay-3">
+          <div class="benefit-icon">🔋</div>
+          <h3>18-Month Battery</h3>
+          <p>No charging cables, no dead battery panic. Three AAA batteries keep FORMA running for over a year.</p>
+        </div>
+        <div class="benefit-card reveal reveal-delay-4">
+          <div class="benefit-icon">🏆</div>
+          <h3>Clinical Accuracy</h3>
+          <p>±0.1 kg precision. Tested against DEXA scans. Validated by sports scientists. Trusted by professionals.</p>
+        </div>
+        <div class="benefit-card reveal reveal-delay-1" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;">
+          <div class="eyebrow" style="margin-bottom:12px;">Companion App</div>
+          <h3 style="margin-bottom:12px;">Trends that<br/>motivate</h3>
+          <p style="margin-bottom:24px;font-size:.85rem;">See your weekly, monthly, and yearly progress visualized in a clean dashboard.</p>
+          <button class="btn btn-primary" style="padding:12px 28px;font-size:.85rem;">Get the App Free</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METRICS STRIP -->
+  <section id="metrics">
+    <div class="container">
+      <div class="metrics-grid reveal">
+        <div class="metric-box">
+          <div class="metric-big" data-count="17">0</div>
+          <div class="metric-desc">Body metrics tracked simultaneously</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-big" data-count="98">0<span>%</span></div>
+          <div class="metric-desc">Measurement accuracy vs DEXA</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-big">4.9<span style="font-size:1.5rem">★</span></div>
+          <div class="metric-desc">Average rating from 4,200+ reviews</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-big" data-count="50">0<span>K+</span></div>
+          <div class="metric-desc">Happy customers worldwide</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE -->
+  <section id="showcase">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow reveal">Product Deep Dive</div>
+        <h2 class="reveal reveal-delay-1">Engineered for<br/><span class="gradient-text">the serious athlete</span></h2>
+      </div>
+      <div class="showcase-inner">
+        <div>
+          <div class="showcase-tabs">
+            <button class="showcase-tab active" data-tab="body">Body Composition</button>
+            <button class="showcase-tab" data-tab="app">Smart App</button>
+            <button class="showcase-tab" data-tab="design">Design</button>
+          </div>
+
+          <div class="showcase-panel active" id="tab-body">
+            <h3>Full-body composition<br/>analysis</h3>
+            <p>FORMA uses 4-electrode BIA technology to deliver insights that rival medical-grade equipment — in your own bathroom.</p>
+            <ul class="feature-list">
+              <li><span class="feature-check">✦</span> Body fat % with segmental breakdown</li>
+              <li><span class="feature-check">✦</span> Skeletal muscle mass & BMI</li>
+              <li><span class="feature-check">✦</span> Visceral fat assessment (level 1–20)</li>
+              <li><span class="feature-check">✦</span> Bone mineral content & hydration</li>
+            </ul>
+          </div>
+
+          <div class="showcase-panel" id="tab-app">
+            <h3>Your health data,<br/>beautifully organized</h3>
+            <p>The FORMA app turns raw data into personalized insights, goal tracking, and weekly health reports you actually want to read.</p>
+            <ul class="feature-list">
+              <li><span class="feature-check">✦</span> AI-powered trend analysis</li>
+              <li><span class="feature-check">✦</span> Weekly health reports via email</li>
+              <li><span class="feature-check">✦</span> Goal setting with smart milestones</li>
+              <li><span class="feature-check">✦</span> Family sharing with 8 profiles</li>
+            </ul>
+          </div>
+
+          <div class="showcase-panel" id="tab-design">
+            <h3>Minimal. Precise.<br/>Built to last.</h3>
+            <p>4mm tempered glass surface. Brushed aluminum accents. Designed to complement your space, not clash with it.</p>
+            <ul class="feature-list">
+              <li><span class="feature-check">✦</span> 4mm tempered glass, 180kg rated</li>
+              <li><span class="feature-check">✦</span> ITO electrode coating for precision</li>
+              <li><span class="feature-check">✦</span> LED ambient light indicator</li>
+              <li><span class="feature-check">✦</span> Available in Midnight & Arctic White</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="showcase-device reveal">
+          <div class="device-frame">
+            <div class="scale-visual" id="showcaseDevice">
+              <div class="scale-display" id="showcaseValue">18.4%</div>
+              <div class="scale-unit">BODY FAT</div>
+              <div class="scale-label">FORMA · BIA Pro</div>
+              <div class="scale-led"></div>
+            </div>
+          </div>
+          <div class="showcase-float top" id="showcaseTopBadge">✦ Clinical Grade</div>
+          <div class="showcase-float bottom" id="showcaseBottomBadge">↑ 2.1kg muscle gained</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow reveal">Social Proof</div>
+        <h2 class="reveal reveal-delay-1">People love<br/><span class="gradient-text">their FORMA</span></h2>
+        <p class="reveal reveal-delay-2">4.9 stars from 4,200+ verified buyers. Don't take our word for it.</p>
+      </div>
+      <div class="reviews-slider">
+        <div class="reviews-track" id="reviewsTrack">
+          <div class="review-card">
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+            <p class="review-text">"I've tried 4 smart scales. This is the first one that actually syncs properly with my Apple Watch and doesn't give wildly different readings day to day. The accuracy is genuinely impressive."</p>
+            <div class="review-author">
+              <div class="review-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)">JM</div>
+              <div>
+                <div class="review-name">Jake M.</div>
+                <div class="review-role">Marathon runner · Boston, MA</div>
+              </div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+            <p class="review-text">"As a personal trainer I recommend FORMA to all my clients. The body composition data is close enough to DEXA that it's actually useful for tracking real changes. Game changer."</p>
+            <div class="review-author">
+              <div class="review-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">SR</div>
+              <div>
+                <div class="review-name">Sarah R.</div>
+                <div class="review-role">NASM Certified PT · Los Angeles</div>
+              </div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+            <p class="review-text">"Setup took 2 minutes. The app is clean and intuitive. My whole family uses it — it auto-detects who's on the scale. Worth every penny of the $149."</p>
+            <div class="review-author">
+              <div class="review-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">DK</div>
+              <div>
+                <div class="review-name">David K.</div>
+                <div class="review-role">Software engineer · Chicago</div>
+              </div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+            <p class="review-text">"Lost 12kg over 6 months and FORMA tracked every bit of the journey. Seeing my visceral fat drop week by week was the motivation I needed to keep going."</p>
+            <div class="review-author">
+              <div class="review-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">PL</div>
+              <div>
+                <div class="review-name">Priya L.</div>
+                <div class="review-role">Yoga instructor · Toronto</div>
+              </div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+            <p class="review-text">"The build quality alone justifies the price. Feels premium. Looks premium. And the data it gives you is genuinely useful — not just vanity numbers."</p>
+            <div class="review-author">
+              <div class="review-avatar" style="background:linear-gradient(135deg,#fa709a,#fee140)">TW</div>
+              <div>
+                <div class="review-name">Tom W.</div>
+                <div class="review-role">Competitive cyclist · London</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slider-controls">
+        <button class="slider-btn" id="reviewPrev">&#8592;</button>
+        <div class="slider-dots" id="sliderDots">
+          <div class="slider-dot active"></div>
+          <div class="slider-dot"></div>
+          <div class="slider-dot"></div>
+          <div class="slider-dot"></div>
+          <div class="slider-dot"></div>
+        </div>
+        <button class="slider-btn" id="reviewNext">&#8594;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow reveal">FAQ</div>
+        <h2 class="reveal reveal-delay-1">Everything you<br/><span class="gradient-text">need to know</span></h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q">
+            How accurate is FORMA compared to a DEXA scan?
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">FORMA uses 4-point bioelectrical impedance analysis (BIA), which in our clinical trials showed &lt;2% deviation from DEXA scan results when measured under consistent conditions (morning, before eating). It won't replace a DEXA, but it gives you actionable trends that are highly reliable day to day.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            How does the family profiles feature work?
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">FORMA supports up to 8 user profiles. It automatically identifies who is stepping on the scale based on weight history and uses the app's Bluetooth connection to assign the measurement to the correct profile. Setup takes under 60 seconds per person.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            What health apps does FORMA integrate with?
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">FORMA syncs natively with Apple Health (HealthKit), Google Fit, Fitbit, Garmin Connect, and MyFitnessPal. All 17 metrics are exported. The FORMA app is available on iOS 14+ and Android 8+.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            Do I need a smartphone to use FORMA?
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">No. FORMA works as a standalone scale and displays weight, BMI, and body fat % directly on the built-in LED display. The smartphone app unlocks the full suite of 17 metrics, trend analytics, and health app syncing.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            What's the warranty and return policy?
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">FORMA comes with a 12-month manufacturer warranty covering any hardware defects. We offer a 30-day no-questions-asked return policy. If you don't love it, ship it back — we'll cover the return postage.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">
+            How long does shipping take?
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">Standard shipping (US): 3–5 business days. Express shipping (US): 1–2 business days. International shipping (EU, UK, AU, CA): 7–14 business days. All orders ship from our warehouse in Austin, TX with full tracking.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section id="closing-cta">
+    <div class="cta-glow"></div>
+    <div class="container">
+      <div class="eyebrow reveal">Limited Launch Offer</div>
+      <h2 class="reveal reveal-delay-1">Start tracking what<br/><span class="gradient-text">actually matters</span></h2>
+      <p class="reveal reveal-delay-2">Join 50,000+ athletes, trainers, and health-focused people who use FORMA to understand their bodies and hit their goals faster.</p>
+      <div class="cta-group reveal reveal-delay-3">
+        <button class="btn btn-primary btn-lg">
+          Order FORMA — $149
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </button>
+        <button class="btn btn-outline btn-lg">Free Shipping Today ›</button>
+      </div>
+      <div class="trust-badges reveal reveal-delay-4">
+        <div class="trust-badge"><span>🔒</span><span>Secure Checkout</span></div>
+        <div class="trust-badge"><span>📦</span><span>Free US Shipping</span></div>
+        <div class="trust-badge"><span>↩️</span><span>30-Day Returns</span></div>
+        <div class="trust-badge"><span>🏆</span><span>12-Month Warranty</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">FOR<span>MA</span></div>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Shipping Info</a>
+      <a href="#">Contact</a>
+      <a href="#">Press</a>
+    </div>
+    <p>© 2026 FORMA Technologies, Inc. All rights reserved.</p>
+  </footer>
+
+  <!-- STICKY BAR -->
+  <div class="sticky-bar" id="stickyBar">
+    <div>
+      <div class="sticky-bar-text">FORMA Smart Scale <span>· 17 body metrics · Free US shipping</span></div>
+    </div>
+    <div class="sticky-bar-actions">
+      <div class="sticky-price">$149</div>
+      <button class="btn btn-primary" style="padding:12px 28px;font-size:.9rem;">Buy Now</button>
+    </div>
+  </div>
+
+  <script>
+    // ─── NAV scroll ───
+    const navbar = document.getElementById('navbar');
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.body.scrollHeight - window.innerHeight;
+      navbar.classList.toggle('scrolled', scrolled > 60);
+      progressBar.style.width = (scrolled / total * 100) + '%';
+    }, { passive: true });
+
+    // ─── Scroll Reveal ───
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // ─── Counter animation ───
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.count, 10);
+      if (!target) return;
+      const suffix = el.querySelector('span') ? el.querySelector('span').textContent : '';
+      const duration = 1200;
+      const startTime = performance.now();
+      function step(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const val = Math.round(eased * target);
+        if (el.querySelector('span')) { el.childNodes[0].textContent = val; }
+        else { el.textContent = val; }
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); counterObs.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
+
+    // ─── Showcase tabs ───
+    const tabs = document.querySelectorAll('.showcase-tab');
+    const deviceDisplay = document.getElementById('showcaseValue');
+    const deviceUnit = deviceDisplay ? deviceDisplay.nextElementSibling : null;
+    const topBadge = document.getElementById('showcaseTopBadge');
+    const botBadge = document.getElementById('showcaseBottomBadge');
+    const tabData = {
+      body: { value: '18.4%', unit: 'BODY FAT', top: '✦ Clinical Grade', bot: '↑ 2.1kg muscle gained' },
+      app:  { value: '89',   unit: 'HEALTH SCORE', top: '📱 App Connected', bot: '↑ Trending upward' },
+      design: { value: '4mm', unit: 'GLASS TOP', top: '✦ Premium Build', bot: '🎨 2 colors available' },
+    };
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.showcase-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        const key = tab.dataset.tab;
+        document.getElementById('tab-' + key).classList.add('active');
+        if (deviceDisplay && tabData[key]) {
+          deviceDisplay.style.animation = 'none';
+          deviceDisplay.textContent = tabData[key].value;
+          deviceUnit.textContent = tabData[key].unit;
+          topBadge.textContent = tabData[key].top;
+          botBadge.textContent = tabData[key].bot;
+          deviceDisplay.style.animation = '';
+        }
+      });
+    });
+
+    // ─── Reviews slider ───
+    const track = document.getElementById('reviewsTrack');
+    const dots = document.querySelectorAll('.slider-dot');
+    let currentSlide = 0;
+    let autoSlideTimer;
+    function getCardWidth() {
+      const card = track.querySelector('.review-card');
+      return card ? card.offsetWidth + 24 : 404;
+    }
+    function goTo(idx) {
+      const max = track.children.length - 1;
+      currentSlide = Math.max(0, Math.min(idx, max));
+      track.style.transform = `translateX(-${currentSlide * getCardWidth()}px)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+    }
+    function startAuto() { autoSlideTimer = setInterval(() => goTo((currentSlide + 1) % track.children.length), 4500); }
+    function stopAuto() { clearInterval(autoSlideTimer); }
+    document.getElementById('reviewPrev').addEventListener('click', () => { stopAuto(); goTo(currentSlide - 1); startAuto(); });
+    document.getElementById('reviewNext').addEventListener('click', () => { stopAuto(); goTo(currentSlide + 1); startAuto(); });
+    dots.forEach((d, i) => d.addEventListener('click', () => { stopAuto(); goTo(i); startAuto(); }));
+    startAuto();
+
+    // ─── FAQ Accordion ───
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const answer = item.querySelector('.faq-a');
+        const isOpen = item.classList.contains('open');
+        // close all
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-a').style.maxHeight = '0';
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // ─── Sticky bar show/hide ───
+    const stickyBar = document.getElementById('stickyBar');
+    const heroBottom = () => document.getElementById('hero').getBoundingClientRect().bottom;
+    const closingTop = () => document.getElementById('closing-cta').getBoundingClientRect().top;
+    window.addEventListener('scroll', () => {
+      const show = heroBottom() < -100 && closingTop() > window.innerHeight;
+      stickyBar.classList.toggle('visible', show);
+    }, { passive: true });
+
+    // ─── Hero counters immediate ───
+    document.querySelectorAll('.hero-stats [data-count]').forEach(el => {
+      const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) { animateCounter(el); obs.disconnect(); }
+      }, { threshold: 0.4 });
+      obs.observe(el);
+    });
+
+    // ─── Parallax on hero visual ───
+    const heroVisual = document.querySelector('.hero-visual');
+    if (heroVisual && window.matchMedia('(min-width:900px)').matches) {
+      window.addEventListener('scroll', () => {
+        const offset = window.scrollY * 0.12;
+        heroVisual.style.transform = `translateY(${offset}px)`;
+      }, { passive: true });
+    }
+
+    // ─── Mobile nav ───
+    const mobileMenu = document.createElement('div');
+    mobileMenu.className = 'nav-mobile-menu';
+    mobileMenu.innerHTML = `
+      <a href="#benefits" class="mobile-link">Benefits</a>
+      <a href="#showcase" class="mobile-link">Features</a>
+      <a href="#reviews" class="mobile-link">Reviews</a>
+      <a href="#faq" class="mobile-link">FAQ</a>
+      <div class="nav-mobile-menu-cta">
+        <button class="btn btn-primary btn-lg">Buy Now — $149</button>
+      </div>
+    `;
+    document.body.appendChild(mobileMenu);
+    const toggleBtn = document.getElementById('mobileToggle');
+    function openMobileMenu() {
+      mobileMenu.classList.add('open');
+      requestAnimationFrame(() => mobileMenu.classList.add('visible'));
+      toggleBtn.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('visible');
+      toggleBtn.classList.remove('open');
+      document.body.style.overflow = '';
+      mobileMenu.addEventListener('transitionend', () => mobileMenu.classList.remove('open'), { once: true });
+    }
+    toggleBtn.addEventListener('click', () => {
+      toggleBtn.classList.contains('open') ? closeMobileMenu() : openMobileMenu();
+    });
+    mobileMenu.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', closeMobileMenu));
+  </script>
+</body>
+</html>
