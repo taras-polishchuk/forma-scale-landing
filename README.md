@@ -1,74 +1,35 @@
-# 🚀 Forma Scale Landing
+# FORMA Scale — Landing Page
 
-A modern, high-converting landing page built for a digital product brand — focused on clean UI, performance, and user flow.
+A high-converting product landing page for a smart fitness scale brand — scroll-triggered animations, interactive product showcase, and a sticky CTA bar. Zero dependencies, pure HTML/CSS/JS.
 
-👉 Live: https://taras-polishchuk.github.io/forma-scale-landing/
-
----
-
-## 🧠 Overview
-
-This project is a conversion-focused landing page designed to present a digital product in a clear, structured, and visually engaging way.
-
-It demonstrates how I approach:
-
-* layout structure
-* visual hierarchy
-* user flow
-* performance optimization
+**Live:** https://taras-polishchuk.github.io/forma-scale-landing/
 
 ---
 
-## 🎯 What I focused on
+## What this demonstrates
 
-* ✨ **Clean, modern UI** — minimal but impactful
-* 🧭 **Clear content flow** — from value → features → CTA
-* ⚡ **Fast performance** — lightweight and optimized
-* 📱 **Responsive design** — works across all devices
-* 🎨 **Attention to detail** — spacing, typography, consistency
+This is the kind of page Shopify brands use for product launches, standalone campaigns, or custom landing experiences outside the default theme. I built it from scratch to show what's possible without a page builder.
 
----
-
-## 💡 Real-world relevance
-
-This is the type of landing page commonly used for:
-
-* Shopify brands
-* SaaS products
-* digital services
-* marketing campaigns
+- Scroll-triggered section animations
+- Parallax hero
+- Interactive product tab switcher
+- Auto-play reviews carousel
+- FAQ accordion
+- Sticky CTA bar
+- Fully responsive, pixel-perfect on mobile
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-* HTML / CSS / JavaScript
-* Tailwind CSS
-
----
-
-## 📌 What this project shows
-
-* ability to build **production-ready UI**
-* understanding of **conversion-focused design**
-* clean and maintainable code
-* attention to UX details
+- HTML / CSS / JavaScript — no frameworks, no build step
+- Tailwind CSS
 
 ---
 
-## 👨‍💻 About me
+## My Shopify work
 
-Frontend / Shopify Developer focused on building clean, high-performing storefronts and landing pages.
+I build and customize Shopify storefronts professionally — Liquid sections, theme migrations, UI improvements, bug fixes. This landing page reflects the same attention to UI detail I bring to Shopify work.
 
-I can help with:
-
-* Shopify theme customization
-* landing pages
-* UI implementation from design
-* performance improvements
-
----
-
-## ⭐️
-
-If you like the project — feel free to star it.
+→ Full portfolio: [taras-polishchuk.github.io](https://taras-polishchuk.github.io)  
+→ Contact: [poli.taras.shchuk@gmail.com](mailto:poli.taras.shchuk@gmail.com)
